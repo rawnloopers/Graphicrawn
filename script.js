@@ -73,7 +73,7 @@ const rawnnPortfolio = new Portfolio({
     "QA Testing (Cypress / Selenium)",
     "Full-stack Development (HTML/CSS/JS/PHP)",
     "UX/UI Design (Figma)",
-    "Graphic Design (Canva, Photoshop)",
+    "Graphic Design (Canva, Adobe)",
     "Project Management (Agile/Scrum)"
   ],
   projects: [
