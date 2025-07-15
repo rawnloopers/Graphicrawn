@@ -65,7 +65,7 @@ class Theme {
 
 const rawnnPortfolio = new Portfolio({
   name: "Rawnn Rushday Heyloopers",
-  tagline: "QA Tester • Web Admin • Designer @ Graphicrawn • Developer @ Eseqr, TIMO, Ranao HRS • Future PM",
+  tagline: "IT Professional • Designer @ Graphicrawn",
   about: "I’m an IT Professioanl with an experience of QA Tester, Web Administrator, and Graphic Designer (Graphicrawn) with experience in UX/UI, QA automation, debugging, and full-stack development. I’ve built and tested academic systems like TIMO and Ranao HRS, and I’m pursuing an MMITM degree to transition into project leadership roles.",
   skills: [
     "JavaScript / TypeScript",
