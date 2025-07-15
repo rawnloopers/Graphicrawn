@@ -65,13 +65,13 @@ class Theme {
 
 const rawnnPortfolio = new Portfolio({
   name: "Rawnn Rushday Heyloopers",
-  tagline: "QA Tester • Web Admin • Designer @ Graphicrawn • Developer @ Eseqr • QA @ Ranao HRS • Future PM",
-  about: "I’m a QA Tester, Web Administrator, and Graphic Designer (Graphicrawn) with experience in UX/UI, QA automation, debugging, and front-end development. I’ve contributed to academic systems like Ranao HRS by ITS Marawi and Eseqr, and I’m pursuing an MMITM degree with a goal to transition into tech-focused project management roles.",
+  tagline: "QA Tester • Web Admin • Designer @ Graphicrawn • Developer @ Eseqr, TIMO, Ranao HRS • Future PM",
+  about: "I’m an IT Professioanl with an experience of QA Tester, Web Administrator, and Graphic Designer (Graphicrawn) with experience in UX/UI, QA automation, debugging, and full-stack development. I’ve built and tested academic systems like TIMO and Ranao HRS, and I’m pursuing an MMITM degree to transition into project leadership roles.",
   skills: [
     "JavaScript / TypeScript",
     "React / Vue",
     "QA Testing (Cypress / Selenium)",
-    "Automation Testing & Debugging",
+    "Full-stack Development (HTML/CSS/JS/PHP)",
     "UX/UI Design (Figma)",
     "Graphic Design (Canva, Photoshop)",
     "Project Management (Agile/Scrum)"
@@ -79,7 +79,7 @@ const rawnnPortfolio = new Portfolio({
   projects: [
     {
       title: "TIMO System",
-      description: "QA and UX Designer for a web-based info management system for MSU-Marawi Faculty Union."
+      description: "Full-stack Developer and QA/UX Designer for TIMO, a web-based information management system for MSU-Marawi Faculty Union. Contributed to system architecture, testing, and user-centered interface."
     },
     {
       title: "MSU Naawan Website",
@@ -91,19 +91,18 @@ const rawnnPortfolio = new Portfolio({
     },
     {
       title: "Ranao HRS",
-      description: "QA Automation Tester and Debugger at ITS Marawi for the Ranao Human Resource System."
+      description: "Developer and QA Automation Tester for the Ranao Human Resource System by ITS Marawi. Handled core module development, debugging, and testing."
     },
     {
-      title: "Graphicrawn Works",
+      title: "Graphicrawn",
       description: "Branding, logo design, and promotional graphics for local businesses and clients."
     }
   ],
   certifications: [
     "Google Project Management Certificate (In Progress)",
-    "Udemy: Software Testing & Agile",
-    "Graphic Design Mastery (Freelance / Self-Taught)"
+    "DigitaljobsPH Training Program - Graphic Design with Canva",
   ],
-  contact: "Email: rawnn.heyloopers@example.com | GitHub: github.com/rawnndev | IG: @graphicrawn"
+  contact: "Email: rawnrusdee11@gmail.com | GitHub: github.com/rawnloopers | IG: @graphicrawn | LinkedIn: linkedin.com/in/ron-rhasdy-a-ilupa-4a3938270"
 });
 
 rawnnPortfolio.renderAll();
