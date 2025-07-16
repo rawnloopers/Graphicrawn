@@ -1,17 +1,40 @@
+/* style.css */
+
+/* Add this global box-sizing for easier layout calculations */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
 :root {
-  --bg-color: #F0F2F5;
-  --text-color: #1A1A1A;
-  --card-bg: #4A4A4A;
-  --card-text: #FFFFFF;
-  --accent-color: #1877F2;
+  /* Light Mode Colors - Adjusted to the specific gray #7F7E73 for background */
+  --bg-color: #7F7E73; /* New background color */
+  --text-color: #FFFFFF; /* White text for readability on the darker gray background */
+  --card-bg: #FFFFFF; /* White card background for a clean, contrasting look */
+  --card-text: #333333; /* Dark text for cards for readability on white background */
+  --accent-color: #C2C2C2; /* Lighter gray for accents/borders to stand out on new background */
+  --border-color-light: #F0F0F0; /* Very light border for cards */
+  --box-shadow-light: rgba(0,0,0,0.1); /* Subtle shadow for minimalist look */
+
+  /* Skill card specific variables (light mode) */
+  --skill-card-text-color-light: var(--card-text); /* Usually dark on white */
+  --skill-icon-color-light: #333333; /* Dark color for icons in light mode */
+  --skill-description-color-light: #666666; /* Slightly lighter text for descriptions */
 }
 
 body.dark {
-  --bg-color: #2E2E2E;
-  --text-color: #F5F5F5;
-  --card-bg: #D3D3D3;
-  --card-text: #1A1A1A;
-  --accent-color: #6EA4E0;
+  /* Dark Mode Colors - Based on Darker Gray from Logo (unchanged) */
+  --bg-color: #333333; /* Darker gray from logo for main background */
+  --text-color: #F5F5F5; /* Light text for readability on dark background */
+  --card-bg: #4A4A4A; /* Slightly lighter dark gray for card backgrounds */
+  --card-text: #F5F5F5; /* Light text for cards */
+  --accent-color: #9C9C9C; /* A lighter gray for dark mode accents/borders */
+  --border-color-dark: #5A5A5A; /* Darker border for cards */
+  --box-shadow-dark: rgba(0,0,0,0.4); /* Stronger shadow in dark mode */
+
+  /* Skill card specific variables (dark mode) */
+  --skill-card-text-color-dark: var(--card-text); /* Usually light on dark */
+  --skill-icon-color-dark: #F5F5F5; /* Light color for icons in dark mode */
+  --skill-description-color-dark: #CCCCCC; /* Slightly lighter text for descriptions */
 }
 
 body {
@@ -36,7 +59,7 @@ header h1 {
 
 header p {
   font-size: 1.2rem;
-  opacity: 0.8;
+  opacity: 0.9;
 }
 
 .toggle-btn {
@@ -50,12 +73,46 @@ header p {
   border-radius: 30px;
   cursor: pointer;
   transition: background 0.3s, color 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .toggle-btn:hover {
   background: var(--accent-color);
   color: var(--bg-color);
 }
+.toggle-btn:focus {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
+}
+
+/* Hide mobile icon by default, show text */
+.toggle-icon-mobile {
+    display: none;
+}
+
+.toggle-text {
+    display: inline;
+}
+
+/* Media query for mobile devices (e.g., max-width 768px) */
+@media (max-width: 768px) {
+    .toggle-btn {
+        width: 45px;
+        height: 45px;
+        padding: 0;
+        border-radius: 50%;
+    }
+    .toggle-text {
+        display: none;
+    }
+    .toggle-icon-mobile {
+        display: inline-block;
+        font-size: 1.2em;
+    }
+}
+
 
 .container {
   max-width: 1200px;
@@ -72,40 +129,107 @@ h2 {
   border-bottom: 2px solid var(--accent-color);
   display: inline-block;
   margin-bottom: 1rem;
+  color: var(--accent-color);
 }
 
-.grid {
+/* --- Project Grid Styles (Bento Box Inspired) --- */
+#projects {
   display: grid;
   gap: 1.5rem;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  grid-auto-rows: 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-auto-rows: minmax(180px, auto);
   grid-auto-flow: dense;
+  align-items: stretch;
 }
 
+/* Base Card Style - applied to both project and skill cards */
 .card {
   background: var(--card-bg);
   color: var(--card-text);
   padding: 1.5rem;
-  border-radius: 16px;
-  box-shadow: 0 6px 12px rgba(0,0,0,0.1);
-  border: 1px solid transparent;
-  transition: border-color 0.3s, background 0.3s, color 0.3s;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px var(--box-shadow-light);
+  border: 1px solid var(--border-color-light);
+  transition: border-color 0.3s, background 0.3s, color 0.3s, box-shadow 0.3s, transform 0.2s ease-out;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  text-decoration: none;
+  overflow: hidden;
+}
+
+body.dark .card {
+  box-shadow: 0 4px 10px var(--box-shadow-dark);
+  border: 1px solid var(--border-color-dark);
 }
 
 .card:hover {
   border-color: var(--accent-color);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+  transform: translateY(-4px);
+}
+body.dark .card:hover {
+  box-shadow: 0 6px 15px rgba(0,0,0,0.4);
 }
 
-footer {
-  text-align: center;
-  padding: 2rem 1rem;
+.card h3 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  font-size: 1.25rem;
+  line-height: 1.2;
+}
+
+.card p {
   font-size: 0.95rem;
-  opacity: 0.7;
+  flex-grow: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
 }
 
+/* --- Spanning Classes for Bento Effect (for Projects) --- */
+.card-w-2 {
+  grid-column: span 2;
+}
+
+.card-h-2 {
+  grid-row: span 2;
+}
+
+/* --- Responsive Layouts --- */
+
+/* Desktop Layout (min-width 1024px) */
+@media (min-width: 1024px) {
+  #projects {
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 200px;
+  }
+
+  .project-timo {
+    grid-column: span 2;
+  }
+  .project-ranao {
+      grid-column: span 2;
+  }
+  .project-graphicrawn {
+      grid-column: span 2;
+  }
+}
+
+/* Tablet Layout (min-width 601px and max-width 1023px) */
+@media (min-width: 601px) and (max-width: 1023px) {
+  #projects {
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: minmax(180px, auto);
+  }
+
+  .project-timo, .project-ranao, .project-graphicrawn {
+      grid-column: span 2;
+  }
+}
+
+/* Phone Layout (max-width: 600px) */
 @media (max-width: 600px) {
   header h1 {
     font-size: 2rem;
@@ -115,4 +239,276 @@ footer {
     font-size: 0.9rem;
     padding: 0.4rem 0.8rem;
   }
+
+  #projects {
+    grid-template-columns: 1fr;
+    grid-auto-rows: minmax(120px, auto);
+  }
+
+  .card-w-2, .card-h-2,
+  .project-timo, .project-msu, .project-eseqr, .project-ranao, .project-graphicrawn {
+    grid-column: auto;
+    grid-row: auto;
+  }
+}
+
+/* --- Skills Section Specific Styles (Uniform Squares, Responsive) --- */
+#skills {
+  display: grid;
+  gap: 1rem;
+  /* Use auto-fit for flexible column count based on available space */
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); /* Increased min size for better desktop/tablet view */
+  grid-auto-rows: 150px; /* Fixed height for consistent card appearance */
+  align-items: stretch;
+  justify-content: center; /* Center the grid items horizontally */
+  /* For older browsers or specific needs, you might use 'margin: 0 auto;' if max-width is set on #skills */
+}
+
+.skill-card {
+  padding: 0.8rem;
+  text-align: center;
+  display: flex; /* Use flexbox for centering content */
+  flex-direction: column;
+  align-items: center; /* Center items horizontally */
+  justify-content: center; /* Center items vertically initially */
+  aspect-ratio: 1 / 1; /* Makes the card perfectly square */
+  min-height: 0; /* Important for aspect-ratio to work in grid */
+  border-radius: 12px;
+  color: var(--skill-card-text-color-light);
+  cursor: pointer;
+  position: relative; /* Needed for absolute positioning of description/name */
+  overflow: hidden; /* Hide overflowing content initially */
+  transition: transform 0.2s ease-out, background-color 0.3s ease-in-out;
+}
+
+body.dark .skill-card {
+    color: var(--skill-card-text-color-dark);
+}
+
+.skill-card:hover {
+    transform: translateY(-2px); /* Subtle lift on hover */
+    /* No background/color change here, as description will cover */
+}
+
+/* Styling for the font icons */
+.skill-icon {
+    font-size: 2em; /* Default icon size */
+    margin-bottom: 0.3rem;
+    color: var(--skill-icon-color-light);
+    /* Transition opacity/visibility for desktop hover effect */
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
+
+body.dark .skill-icon {
+    color: var(--skill-icon-color-dark);
+}
+
+.skill-name {
+    font-size: 0.85rem;
+    font-weight: bold;
+    line-height: 1.2;
+    /* On desktop/tablet, skill-name is part of the flow unless description is hovered */
+    margin-top: 0; /* Reset margin from previous versions */
+    margin-bottom: 0.3rem; /* Add back margin for proper spacing */
+    opacity: 1; /* Default to visible on desktop/tablet */
+    visibility: visible;
+    position: static; /* Reset positioning for desktop/tablet */
+    transform: none; /* Reset transform for desktop/tablet */
+    background-color: transparent; /* Reset background */
+    color: var(--card-text); /* Ensure text color is correct */
+    padding: 0; /* Reset padding */
+    white-space: normal; /* Allow text to wrap on desktop/tablet */
+    pointer-events: auto; /* Enable pointer events */
+}
+
+/* Skill description - generally hidden by default, shown only on desktop/tablet hover */
+.skill-description {
+    position: absolute; /* Position over icon/name */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--card-bg); /* Match card background to "hide" content */
+    color: var(--card-text); /* Match card text color */
+    padding: 0.8rem; /* Match card padding */
+    display: flex;
+    align-items: center; /* Center description text vertically */
+    justify-content: center; /* Center description text horizontally */
+    text-align: center;
+    font-size: 0.75rem;
+    line-height: 1.3;
+    opacity: 0;
+    visibility: hidden;
+    overflow-y: auto; /* Enable vertical scroll for long descriptions */
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
+
+/* Desktop/Tablet: On hover, reveal description and hide icon/name */
+@media (min-width: 481px) {
+    .skill-card:hover .skill-description {
+        opacity: 1;
+        visibility: visible;
+    }
+    .skill-card:hover .skill-icon,
+    .skill-card:hover .skill-name {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+
+/* Responsive adjustments for skills grid */
+
+/* Desktop Layout for Skills */
+@media (min-width: 1024px) {
+  #skills {
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); /* Larger min size for wider desktop cards */
+    grid-auto-rows: 160px; /* Slightly taller cards */
+    gap: 1.2rem; /* Adjusted gap for desktop */
+  }
+  .skill-card {
+    padding: 1.2rem;
+  }
+  .skill-icon {
+    font-size: 2.5em; /* Larger icon on desktop */
+  }
+  .skill-name {
+    font-size: 0.95rem; /* Slightly larger name */
+  }
+  .skill-description {
+    font-size: 0.85rem;
+  }
+}
+
+/* Tablet Layout (min-width 769px and max-width 1023px) */
+@media (min-width: 769px) and (max-width: 1023px) {
+    #skills {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); /* Min size for tablet cards */
+        grid-auto-rows: 140px; /* Uniform height for tablets */
+        gap: 1rem; /* Consistent gap for tablets */
+    }
+    .skill-card {
+        padding: 1rem;
+    }
+    .skill-icon {
+        font-size: 2.2em; /* Adjusted icon size for tablets */
+    }
+    .skill-name {
+        font-size: 0.9rem;
+    }
+    .skill-description {
+        font-size: 0.8rem;
+    }
+}
+
+/* Tablet Layout for smaller tablets (min-width 481px and max-width 768px) */
+@media (min-width: 481px) and (max-width: 768px) {
+    #skills {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* Smaller min size for smaller tablets */
+        grid-auto-rows: 120px; /* Uniform height for smaller tablets */
+        gap: 0.9rem;
+    }
+    .skill-card {
+        padding: 0.8rem;
+    }
+    .skill-icon {
+        font-size: 2em; /* Adjusted icon size */
+    }
+    .skill-name {
+        font-size: 0.85rem;
+    }
+    .skill-description {
+        font-size: 0.75rem;
+    }
+}
+
+
+/* Phone Layout for Skills (circles, logos only, hover title) */
+@media (max-width: 480px) {
+    #skills {
+        grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); /* Adjusted minmax for better spacing */
+        gap: 0.75rem; /* Adjusted gap for mobile */
+    }
+    .skill-card {
+        border-radius: 50%; /* Make them circles */
+        padding: 0.5rem; /* Reduce padding for smaller circles */
+        min-height: 80px; /* Set a minimum size for circles */
+        width: 100%; /* Ensure width fills grid cell */
+        justify-content: center; /* Center content vertically */
+    }
+    .skill-icon {
+        font-size: 2.2em; /* Adjusted icon size for phones, slightly larger for prominence */
+        margin-bottom: 0; /* No margin below icon on mobile */
+        /* Ensure icon remains visible on mobile */
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+    .skill-name {
+        /* On mobile, skill name is initially hidden, appears on hover */
+        position: absolute; /* Reapply absolute positioning for mobile hover */
+        bottom: 0.5rem; /* Position slightly from the bottom */
+        left: 50%;
+        transform: translateX(-50%) translateY(5px); /* Start slightly lower and move up */
+        font-size: 0.75rem; /* Smaller font size for mobile title */
+        background-color: rgba(var(--card-bg-rgb, 255, 255, 255), 0.9); /* Semi-transparent background */
+        color: var(--card-text);
+        padding: 0.2em 0.5em;
+        border-radius: 5px;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out, transform 0.3s ease-in-out;
+        white-space: nowrap; /* Prevent title from wrapping */
+        pointer-events: none; /* Allow clicks to pass through */
+    }
+
+    /* On mobile hover, show the skill name */
+    .skill-card:hover .skill-name,
+    .skill-card:focus .skill-name { /* Focus for keyboard navigation */
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(-50%) translateY(0); /* Move to final position */
+    }
+
+    .skill-description {
+        display: none; /* Hide description completely on mobile */
+        opacity: 0 !important;
+        visibility: hidden !important;
+    }
+}
+
+
+/* --- Other general styles from your file --- */
+footer {
+  text-align: center;
+  padding: 2rem 1rem;
+  font-size: 0.95rem;
+  opacity: 0.7;
+  color: var(--text-color);
+}
+
+/* Certifications list styling */
+#certifications {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#certifications li {
+  background: var(--card-bg);
+  color: var(--card-text);
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 0.75rem;
+  box-shadow: 0 2px 4px var(--box-shadow-light);
+  border: 1px solid var(--border-color-light);
+  transition: background 0.3s, color 0.3s, box-shadow 0.3s, border-color 0.3s;
+}
+body.dark #certifications li {
+  box-shadow: 0 2px 4px var(--box-shadow-dark);
+  border: 1px solid var(--border-color-dark);
+}
+
+#certifications li:last-child {
+  margin-bottom: 0;
 }
